@@ -1,0 +1,81 @@
+{% block vue %}
+<h2>Qui suis-je ?</h2>
+<p>
+Je suis {{ prenom }} et vous pouvez me contacter par <em>{{ mail }}</em>.
+</p>
+
+<h2>Noms des mentions</h2>
+<ul>
+{# {% for nomCourt, mention in offre.mentions %} #}
+{% for nomCourt, mention in offre['mentions'] %}
+{# <li>{{ mention[’nom’]|upper }} ({{ nomCourt }})</li> #}
+<li>{{ mention.nom|upper }} ({{ nomCourt }})</li>
+{% endfor %}
+</ul>
+<h2>Noms des UEs avec volumes horaires</h2>
+<ul>
+    {% for ue in offre['ues'] %}
+    {# <li>{{ loop.index }}. {{ ue['nom'] }} : {{ ue['volume'] }}</li> #}
+    <li>{{ loop.index }}. {{ ue['nom'] ~ ' : ' ~ ue['volume'] }}</li>
+    {% endfor %}
+</ul>
+<h2>Tableau complet</h2>
+<ul>
+    <li>Mentions
+        <ul>
+            {% for nomCourt, mention in offre['mentions'] %}
+            <li>{{ nomCourt }}
+                <ul>
+                    <li>nom : {{ mention['nom'] }}</li>
+                    <li>parcours :
+                        <ul>
+                            {% for parcours in mention['parcours'] %}
+                            <li>{{ parcours }}</li>
+                            {% endfor %}
+                            </ul>
+                        </li>
+                    <li>responsable : {{ mention['responsable'] }}</li>
+                    </ul>
+                </li>
+            {% endfor %}
+            </ul>
+        </li>
+    <li>UEs
+        <ul>
+            {% for ue in offre['ues'] %}
+            <li>{{ loop.index0 }}
+                <ul>
+                    <li>nom : {{ ue.nom }}</li>
+                    <li>{{ ue.volume }} heure(s)</li>
+                </ul>
+            </li>
+            {% endfor %}
+        </ul>
+    </li>
+</ul>
+<h2>Nombre de mentions</h2>
+<p>{{ offre['mentions'] | length }} mention(s)</p>
+<h2>Le filtre <code>format</code></h2>
+{% set ville = 'Poitiers' %}
+<p>{{ 'il est %d heures `a%s' | format(3, ville) }}</p>
+<h2>Variable globale <code>app</code></h2>
+<p>
+    app.session : {{ dump(app.session) }}
+    app.request : {{ dump(app.request) }}
+    app.environment : {{ dump(app.environment) }}
+    app.debug : {{ dump(app.debug) }}
+    app.user : {{ dump(app.user) }}
+</p>
+<h2>UEs sont le volume horaire est &ge; 30</h2>
+<ul>
+    {% for ue in offre['ues'] %}
+    {% if ue['volume'] >= 30 %}
+    <li>{{ ue['nom'] }} ({{ ue['volume'] }})</li>
+    {% endif %}
+    {% endfor %}
+</ul>
+{% endblock vue %}
+
+
+
+

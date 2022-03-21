@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><!-- ici le bloc title --></title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <div id="menu">
+            {{ render(controller('App\\Controller\\Sandbox\\SandboxTwigController::menuAction')) }}
+        </div>
+        <div id="vue">
+            <h1><!-- ici le bloc titre_principal --></h1>
+            <!-- ici le bloc vue -->
+        </div>
+
+        <div id="footer">
+            {% include 'Sandbox/Layouts/footer.html.twig' %}
+        </div>
+    </body>
+</html>

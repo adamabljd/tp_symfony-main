@@ -1,0 +1,38 @@
+{% extends 'Layouts/layout.html.twig' %}
+{% block titre %}Vente{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="defaut.css">
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" src="global.js"></script>
+    <script type="text/javascript" src="macros.js"></script>
+{% endblock %}
+
+{% block body %}
+    <div>
+        {% include 'Layouts/displayFlash.html.twig' %}
+    </div>
+
+    <div>
+        <p>Menu</p>
+        {{ render(controller('App\\Controller\\AccueilController::menuAction')) }}
+    </div>
+
+    <div>
+        {% include 'Layouts/haut_de_page.html.twig' %}
+    </div>
+
+    <div>
+        <h1>Site De Vente</h1>
+    </div>
+
+    <div>
+        {% block vue %}{% endblock %}
+    </div>
+
+    <div>
+        {% include 'Layouts/footer.html.twig' %}
+    </div>
+{% endblock %}
